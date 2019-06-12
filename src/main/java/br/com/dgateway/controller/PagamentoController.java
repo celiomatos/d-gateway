@@ -5,6 +5,8 @@ import br.com.dgateway.model.Pagamento;
 import br.com.dgateway.model.PagamentoSearchDto;
 import br.com.dgateway.model.Page;
 import br.com.dgateway.service.PagamentoService;
+import com.google.common.io.ByteSource;
+import org.apache.commons.compress.utils.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +17,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
-import org.apache.commons.compress.utils.IOUtils;
 
 @RestController
 @RequestMapping("/pagamentos")
@@ -48,9 +49,12 @@ public class PagamentoController {
     @PostMapping("/pagamentos-to-excell")
     public void pagamentosToExcell(@RequestBody PagamentoSearchDto pagSearchDto) throws IOException {
 
-        pagamentoService.pagamentosToExcell(pagSearchDto);
-        // Copy the stream to the response's output stream.
-        IOUtils.copy(request.getInputStream(), response.getOutputStream());
+        byte[] bytes = pagamentoService.pagamentosToExcell(pagSearchDto);
+        try (InputStream targetStream = ByteSource.wrap(bytes).openStream()) {
+            response.addHeader("Content-disposition", "attachment;filename=sample.xlsx");
+            response.setContentType("application/vnd.ms-excel");
+            IOUtils.copy(targetStream, response.getOutputStream());
+        }
         response.flushBuffer();
     }
 }

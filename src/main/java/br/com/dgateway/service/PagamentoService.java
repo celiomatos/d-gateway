@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -28,5 +27,5 @@ public interface PagamentoService {
     List<FiveYearsDto> fiveYearsPagagmentos();
 
     @PostMapping("/pagamentos-to-excell")
-    InputStream pagamentosToExcell(@RequestBody PagamentoSearchDto pagSearchDto);
+    byte[] pagamentosToExcell(@RequestBody PagamentoSearchDto pagSearchDto);
 }
