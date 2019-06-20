@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Service
-@FeignClient(name = "orgaoService", url = "http://localhost:8084/orgaos")
+@FeignClient(name = "orgaoService", url = "http://d-server-main:8084/orgaos")
 public interface OrgaoService {
 
     @GetMapping("/top-five")

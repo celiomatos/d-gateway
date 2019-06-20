@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
-@FeignClient(name = "classificacaoService", url = "http://localhost:8084/classificacoes")
+@FeignClient(name = "classificacaoService", url = "http://d-server-main:8084/classificacoes")
 public interface ClassificacaoService {
 
     @GetMapping("/find-all")
