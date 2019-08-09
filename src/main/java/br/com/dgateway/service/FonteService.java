@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
-@FeignClient(name = "fonteService", url = "http://d-server-main:8084/fontes")
+@FeignClient(value = "d-server-main", path = "fontes")
 public interface FonteService {
 
     @GetMapping("/find-all")

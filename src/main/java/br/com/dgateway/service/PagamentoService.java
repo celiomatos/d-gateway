@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Service
-@FeignClient(name = "pagamentoService", url = "http://d-server-main:8084/pagamentos")
+@FeignClient(value = "d-server-main", path = "pagamentos")
 public interface PagamentoService {
 
     @PostMapping("/search")

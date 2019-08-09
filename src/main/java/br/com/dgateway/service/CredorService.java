@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Service
-@FeignClient(name = "credorService", url = "http://d-server-main:8084/credores")
+@FeignClient(value = "d-server-main", path = "credores")
 public interface CredorService {
 
     @GetMapping("/top-five")
