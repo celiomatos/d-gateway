@@ -2,7 +2,7 @@ package br.com.dgateway.controller;
 
 import br.com.dgateway.model.Fonte;
 import br.com.dgateway.model.Page;
-import br.com.dgateway.service.FonteService;
+import br.com.dgateway.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class FonteController {
 
     @Autowired
-    private FonteService fonteService;
+    private MainService mainService;
 
     @GetMapping("/find-all")
     public Page<Fonte> findAll(
@@ -20,8 +20,7 @@ public class FonteController {
             @RequestParam String order,
             @RequestParam String sortProperty) {
 
-
-        return fonteService.findAll(page, count, order, sortProperty);
+        return mainService.findAllFontes(page, count, order, sortProperty);
     }
 
     @GetMapping("/find-by-nome/{nome}")
@@ -32,6 +31,6 @@ public class FonteController {
             @RequestParam String order,
             @RequestParam String sortProperty) {
 
-        return fonteService.findByName(nome, page, count, order, sortProperty);
+        return mainService.findFonteByName(nome, page, count, order, sortProperty);
     }
 }

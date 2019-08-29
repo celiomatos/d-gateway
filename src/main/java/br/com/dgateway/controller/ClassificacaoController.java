@@ -2,7 +2,7 @@ package br.com.dgateway.controller;
 
 import br.com.dgateway.model.Classificacao;
 import br.com.dgateway.model.Page;
-import br.com.dgateway.service.ClassificacaoService;
+import br.com.dgateway.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class ClassificacaoController {
 
     @Autowired
-    private ClassificacaoService classificacaoService;
+    private MainService mainService;
 
     @GetMapping("/find-all")
     public Page<Classificacao> findAll(
@@ -20,7 +20,7 @@ public class ClassificacaoController {
             @RequestParam String order,
             @RequestParam String sortProperty) {
 
-        return classificacaoService.findAll(page, count, order, sortProperty);
+        return mainService.findAllClassificacoes(page, count, order, sortProperty);
     }
 
     @GetMapping("/find-by-nome/{nome}")
@@ -31,6 +31,6 @@ public class ClassificacaoController {
             @RequestParam String order,
             @RequestParam String sortProperty) {
 
-        return classificacaoService.findByName(nome, page, count, order, sortProperty);
+        return mainService.findClassificacaoByName(nome, page, count, order, sortProperty);
     }
 }

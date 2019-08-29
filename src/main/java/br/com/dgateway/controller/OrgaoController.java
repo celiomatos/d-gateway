@@ -3,7 +3,7 @@ package br.com.dgateway.controller;
 import br.com.dgateway.model.Orgao;
 import br.com.dgateway.model.Page;
 import br.com.dgateway.model.TopFiveOrgaosDto;
-import br.com.dgateway.service.OrgaoService;
+import br.com.dgateway.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +14,13 @@ import java.util.List;
 public class OrgaoController {
 
     @Autowired
-    private OrgaoService orgaoService;
+    private MainService mainService;
 
     @GetMapping("/top-five")
     public List<TopFiveOrgaosDto> topFive(
             @RequestParam String dateInicial,
             @RequestParam String dateFinal) {
-        return orgaoService.topFive(dateInicial, dateFinal);
+        return mainService.topFiveOrgaos(dateInicial, dateFinal);
     }
 
     @GetMapping("/find-all")
@@ -29,7 +29,7 @@ public class OrgaoController {
             @RequestParam Integer count,
             @RequestParam String order,
             @RequestParam String sortProperty) {
-        return orgaoService.findAll(page, count, order, sortProperty);
+        return mainService.findAllOrgaos(page, count, order, sortProperty);
     }
 
     @GetMapping("/find-by-nome/{nome}")
@@ -39,6 +39,6 @@ public class OrgaoController {
             @RequestParam Integer count,
             @RequestParam String order,
             @RequestParam String sortProperty) {
-        return orgaoService.findByName(nome, page, count, order, sortProperty);
+        return mainService.findOrgaoByName(nome, page, count, order, sortProperty);
     }
 }

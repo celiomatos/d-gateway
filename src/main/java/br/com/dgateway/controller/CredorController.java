@@ -3,7 +3,7 @@ package br.com.dgateway.controller;
 import br.com.dgateway.model.Credor;
 import br.com.dgateway.model.Page;
 import br.com.dgateway.model.TopFiveCredoresDto;
-import br.com.dgateway.service.CredorService;
+import br.com.dgateway.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,13 +14,13 @@ import java.util.List;
 public class CredorController {
 
     @Autowired
-    private CredorService credorService;
+    private MainService mainService;
 
     @GetMapping("/top-five")
     public List<TopFiveCredoresDto> topFiveCredores(
             @RequestParam String dateInicial,
             @RequestParam String dateFinal) {
-        return credorService.topFiveCredores(dateInicial, dateFinal);
+        return mainService.topFiveCredores(dateInicial, dateFinal);
     }
 
     @GetMapping("/find-all")
@@ -30,7 +30,7 @@ public class CredorController {
             @RequestParam String order,
             @RequestParam String sortProperty) {
 
-        return credorService.findAll(page, count, order, sortProperty);
+        return mainService.findAllCredores(page, count, order, sortProperty);
     }
 
     @GetMapping("/find-by-nome/{nome}")
@@ -41,6 +41,6 @@ public class CredorController {
             @RequestParam String order,
             @RequestParam String sortProperty) {
 
-        return credorService.findByName(nome, page, count, order, sortProperty);
+        return mainService.findCredorByName(nome, page, count, order, sortProperty);
     }
 }
